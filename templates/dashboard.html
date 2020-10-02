@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<header class="masthead" style="background-image: url('{{url_for('static',filename='img/home-bg.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Clean Blog</h1>
+            <span class="subheading">A Blog Theme by Start Bootstrap</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <h2 class="col-lg-5 col-md-10 mx-auto">Add New Blog</h2>
+  <div class="col-lg-5 col-md-10 mx-auto clearfix">
+    <a class="btn btn-primary" href="/edit/0">Write New Blog</a>
+    <a class="btn btn-primary" href="/logout">Logout</a>
+  </div>
+    
+  
+  <hr>
+  <h2 class="col-lg-5 col-md-10 mx-auto">Upload File</h2>
+  <div class="col-lg-5 col-md-10 mx-auto clearfix">
+    <form action="/uploaded" method="POST" enctype="multipart/form-data">
+      <input type="file" name="file1">
+   
+    <button  type="submit" class="btn btn-primary">Upload File</button>
+  </form>
+  </div>
+  <hr>
+  <h2 class="col-lg-5 col-md-10 mx-auto">Edit Blog</h2>
+  <hr>
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Sno</th>
+              <th scope="col">Title</th>
+              <th scope="col">Date</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for post in posts %}
+            <tr>
+              <th scope="row">{{post.sno}}</th>
+              <td><a href="/post/{{post.slug}}">{{post.title}}</a></td>
+              <td>{{post.date}}</td>
+              <td><a href="/edit/{{post.sno}}"><button   class="btn btn-secondary">Edit</button></a></td>
+              <td><a href="/delete/{{post.sno}}"><button class="btn btn-secondary">Delete</button></a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+</tbody>
+</table>
+        <!-- Pager -->
+        <div class="clearfix">
+          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
